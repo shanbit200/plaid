@@ -30,7 +30,7 @@ android {
         applicationId names.applicationId
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode rootProject.gitCommitCount
+        versionCode = 1
         versionName = '1.1.0'
         archivesBaseName = 'plaid'
 

@@ -60,7 +60,7 @@ buildscript { scriptHandler ->
     ]
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-beta03'
+        classpath 'com.android.tools.build:gradle:4.0.0-alpha09'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath "com.google.gms:google-services:${versions.googleServices}"
         classpath "io.fabric.tools:gradle:${versions.fabric}"
@@ -71,11 +71,11 @@ plugins {
     id 'com.diffplug.gradle.spotless' version '3.26.1'
 }
 
-ext {
+/*ext {
     // query git for the commit count to automate versioning.
     gitCommitCount = 100 +
             Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
-}
+}*/
 
 subprojects {
     buildscript {
