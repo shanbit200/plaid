@@ -43,6 +43,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -57,6 +58,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.google.android.material.navigation.NavigationView
 import io.plaidapp.R
 import io.plaidapp.core.dagger.qualifier.IsPocketInstalled
 import io.plaidapp.core.data.prefs.SourcesRepository
@@ -100,6 +102,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var loading: ProgressBar
     private lateinit var feedAdapter: FeedAdapter
     private lateinit var filtersList: RecyclerView
+    private lateinit var navigationDrawer: NavigationView
 
     // data
     @Inject
@@ -225,6 +228,38 @@ class HomeActivity : AppCompatActivity() {
             insets.consumeSystemWindowInsets()
         }
 
+        val drawerToggle = object : ActionBarDrawerToggle(this, drawer, R.string.common_open_on_phone, R.string.about) {
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+            }
+        }
+
+        navigationDrawer.setNavigationItemSelectedListener{
+            when (it.itemId) {
+                R.id.nav_home -> {
+                    true
+                }
+
+                R.id.nav_share -> {
+                    true
+                }
+
+            }
+
+            //drawer.closeDrawer(GravityCompat.START)
+            true
+        }
+
+        drawer.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
         setupTaskDescription()
 
         filtersList.apply {
@@ -271,6 +306,7 @@ class HomeActivity : AppCompatActivity() {
         grid = findViewById(R.id.grid)
         filtersList = findViewById(R.id.filters)
         loading = findViewById(android.R.id.empty)
+        navigationDrawer = findViewById(R.id.navigation_view)
 
         columns = resources.getInteger(R.integer.num_columns)
     }
@@ -457,6 +493,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                drawer.openDrawer(GravityCompat.START)
+                true
+            }
             R.id.menu_filter -> {
                 drawer.openDrawer(GravityCompat.END)
                 true

@@ -78,6 +78,16 @@
 
     </FrameLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:clipToPadding="false"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"
+        />
+
     <!-- filter drawer -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filters"
